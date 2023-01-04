@@ -16,7 +16,7 @@ function! CreatePipe(pid)
 	let g:test_players[a:pid].read_buffer = []
 	call system('mkfifo /tmp/vim_multi_player_pipe_' . a:pid)
 	call system('sleep infinity > /tmp/vim_multi_player_pipe_' . a:pid . ' &')
-	let job = job_start('cat /tmp/vim_multi_player_pipe_' . a:pid, {"out_cb": { channel, msg -> call('s:MyHandlerOut', [channel, msg, a:pid])}})
+	let job = jobstart('cat /tmp/vim_multi_player_pipe_' . a:pid, {"out_cb": { channel, msg -> call('s:MyHandlerOut', [channel, msg, a:pid])}})
 endfunction
 
 MultiplayerConnect
